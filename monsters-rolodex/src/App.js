@@ -19,15 +19,20 @@ class App extends Component {
       .then(users => this.setState({ monsters: users }));
   }
 
+  handleSearchChange(event) {
+    event => this.setState({searchField: event.target.value})
+  }
+
   render() {
     const { monsters, searchField } = this.state;
     const filteredMonsters = monsters.filter(monster =>
       monster.name.toLowerCase().includes(searchField.toLowerCase())
     );
 
+  
     return (
       <div className="App">
-        <SearchBox placeHolder='search monsters' handleChange={event => this.setState({searchField: event.target.value})}/>
+        <SearchBox placeHolder='search monsters' handleChange={this.handleSearchChange}/>
         <CardList monsters={filteredMonsters} />
       </div>
     );
